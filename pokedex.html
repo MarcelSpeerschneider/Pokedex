@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokémonWiki</title>
+    <script src="dynamic-html.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body onload="init()">
+
+    <div class="pokedex">
+        <h1 id="pokemonName"></h1>
+        <div class="abilities"></div>
+
+        <div class="info-container">
+            <div class="img-container"><img id="pokemon-img"></div>
+            <nav>
+                <div class="links"><a class="link" onclick="renderAboutHTML()">About</a><a class="link" onclick="renderBaseStats()">Base Stats</a><a
+                        class="link">Evolution</a><a class="link">Moves</a></div>
+            </nav>
+            <div class="content" id="content">
+                
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
+
