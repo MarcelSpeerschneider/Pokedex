@@ -4,6 +4,38 @@ let baseStats = [];
 let narrowBars = [];
 let totalStat = 0;
 
+function renderPokedex() {
+    let pokedexItems = document.getElementById('pokedex');
+    pokedexItems.innerHTML = '';
+
+    for (let i = 0; i < pokemonNames.length; i++) {
+        const name = pokemonNames[i];
+        pokedexItems.innerHTML += `<div class='pokedex-card'>${pokemonNames[i]}</div>`;
+    }
+}
+
+
+
+function RenderPokedexInfo() {
+    let pokedex = document.getElementById('pokedex');
+    pokedex.innerHTML = '';
+    pokedex.innerHTML = /*html*/`
+    <h1 id="pokemonName"></h1>
+    <div class="abilities"></div>
+
+    <div class="info-container">
+        <div class="img-container"><img id="pokemon-img"></div>
+        <nav>
+            <div class="links"><a class="link" onclick="renderAboutHTML()">About</a><a class="link" onclick="renderBaseStats()">Base Stats</a><a
+                    class="link">Evolution</a><a class="link" onclick="setupMovesTable()">Moves</a></div>
+        </nav>
+        <div class="content" id="content">
+            
+        </div>
+    `;
+    init();
+}
+
 async function init() {
     await loadPokemon();
     renderPokemonInfo();
@@ -199,4 +231,25 @@ function renderBaseStatsHTML() {
                     </table>
                 </div>
     `
+}
+
+function setupMovesTable() {
+    let container = document.getElementById('content');
+    container.innerHTML = `
+      <table id="moves-table">
+      </table>
+      `;
+    renderMovesRows();
+}
+
+function renderMovesRows() {
+    let movesTable = document.getElementById('moves-table');
+    for (let i = 0; i < currentPokemon['moves'].length; i++) {
+        const move = currentPokemon['moves'][i].move['name'];
+        movesTable.innerHTML += `
+          <tr>
+            <td>${move}</td>
+          </tr>
+          `;
+    }
 }

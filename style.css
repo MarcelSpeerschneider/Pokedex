@@ -2,8 +2,14 @@ body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     height: 100svh;;
+}
+
+.pokedex-card {
+    padding: 16px;
 }
 
 .pokedex {
@@ -11,8 +17,11 @@ body {
     background-color: #FB6C6C;
     color: white;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: flex-start;
+    width: 600px;
+    height: 100svh;
+    border-radius: 16px 16px 16px 16px;
 
 }
 
