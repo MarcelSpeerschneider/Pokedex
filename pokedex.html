@@ -7,6 +7,7 @@
     <title>PokémonWiki</title>
     <script src="dynamic-html.js"></script>
     <script src="script.js"></script>
+    <link rel="icon" href="./img/pokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,14 +17,13 @@
 
 </head>
 
-<body onload="renderPokedex()">
-
-    <div class="pokedex" id="pokedex">
-
-
+<body onload="init()">
+    <div class="searchBarContainer"></div>
+    <div class="pokedex-container" id="pokedex-container">
+        <div class="pokedex" id="pokedex">
+        </div>
     </div>
 
 </body>
 
 </html>
-

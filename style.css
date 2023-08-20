@@ -1,23 +1,73 @@
 body {
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.searchBarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.pokedex-container {
     font-family: 'Open Sans', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    height: 100svh;;
+    height: 100svh;
 }
 
 .pokedex-card {
+    width: 250px;
     padding: 16px;
+    outline: 3px solid rgba(0, 0, 0, 0.3);
+    margin: 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 20px 20px 17px #bebebe,
+        -20px -20px 17px #ffffff;
+    font-weight: 600;
+}
+
+.fire {
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
+.water {
+    background-color: rgba(84, 114, 250, 0.7);
+}
+
+.bug {
+    background-color: rgba(232, 255, 131, 0.7);
+}
+
+.grass {
+    background-color: rgba(16, 172, 1, 0.7);
+}
+
+.normal {
+    background-color: rgba(135, 172, 1, 0.7);
+}
+
+.dark {
+    background-color: rgba(116, 116, 116, 0.7);
 }
 
 .pokedex {
     width: 100%;
     background-color: #FB6C6C;
     color: white;
+    position: relative;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     justify-content: flex-start;
     width: 600px;
     height: 100svh;
@@ -25,8 +75,11 @@ body {
 
 }
 
-h1 {
+.pokemon-name {
     padding: 16px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+
 }
 
 .info-container {
@@ -39,7 +92,7 @@ h1 {
 
 }
 
-img {
+.pokemon-img {
     width: 200px;
     height: 200px;
 }
@@ -80,12 +133,15 @@ img {
     right: 0;
     left: 0;
     border-bottom: 1px solid rgb(47, 37, 184);
-    opacity: 0;  /* Hier wird das Element standardmäßig unsichtbar gemacht */
-    transition: opacity 0.3s; /* optional: Fügt einen sanften Übergangseffekt hinzu */
+    opacity: 0;
+    /* Hier wird das Element standardmäßig unsichtbar gemacht */
+    transition: opacity 0.3s;
+    /* optional: Fügt einen sanften Übergangseffekt hinzu */
 }
 
- .link:hover::after {
-    opacity: 1;  /* Macht das Element beim Hover sichtbar */
+.link:hover::after {
+    opacity: 1;
+    /* Macht das Element beim Hover sichtbar */
 }
 
 .link:hover {
@@ -130,4 +186,63 @@ tr td {
     justify-content: flex-start;
     padding-left: 30%;
     flex: 1;
+}
+
+.x {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    filter: invert();
+}
+
+.x-container {
+    height: 50px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.types {
+    /* outline: 1px solid black; */
+    width: 54px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 6px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hide {
+    display: none;
+}
+
+input {
+    border: 2px solid rgba(0, 0, 0, 0.267);
+    border-radius: 8px;
+    margin-right: 16px;
+    height: 30px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    background-color: rgba(128, 128, 128, 0.3);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+@media (max-width: 600px) {
+    .pokedex-container {
+        width: 100%;
+    }
 }
