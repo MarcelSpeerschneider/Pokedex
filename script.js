@@ -206,13 +206,14 @@ function renderPokedexInfoHtml() {
             <div class="info-container">
                 <div class="img-container"><img id="pokemon-img" class="pokemon-img"></div>
                 <nav>
-                    <div class="links"><a class="link" onclick="renderAboutHTML()">About</a><a class="link" onclick="renderBaseStats()">Base Stats</a>
-                    <a class="link" onclick="setupMovesTable()">Moves</a></div>
+                    <div class="links">
+                        <a class="link" onclick="renderAboutHTML()">About</a><a class="link" onclick="renderBaseStats()">Base Stats</a>
+                        <a class="link" onclick="setupMovesTable()">Moves</a>
+                    </div>
                 </nav>
-            <div class="content" id="content">
-            
+                <div class="content" id="content"></div>
             </div>
-    </div>
+        </div>
     </div>
     `;
 }
@@ -253,6 +254,7 @@ function existSecondAbility() {
 function renderBaseStatsHTML() {
     let container = document.querySelector('.content');
     container.innerHTML =  /*html*/`
+    <div class="stat-table-container">
     <div class="stat-table">
                     <table>
                         <tr>
@@ -292,14 +294,17 @@ function renderBaseStatsHTML() {
                         </tr>
                     </table>
                 </div>
+    </div>
     `
 }
 
 function setupMovesTable() {
     let container = document.getElementById('content');
-    container.innerHTML = `
-      <table id="moves-table">
-      </table>
+    container.innerHTML = /*html*/`
+            <div class="moves-table-container">
+                <table id="moves-table">
+                </table>
+            </div>
       `;
     renderMovesRows();
 }
@@ -308,10 +313,10 @@ function renderMovesRows() {
     let movesTable = document.getElementById('moves-table');
     for (let i = 0; i < currentPokemon['moves'].length; i++) {
         const move = currentPokemon['moves'][i].move['name'];
-        movesTable.innerHTML += `
-          <tr>
-            <td>${move}</td>
-          </tr>
+        movesTable.innerHTML += /*html*/ `
+            <tr>
+                <td>${move}</td>
+            </tr>
           `;
     }
 }
