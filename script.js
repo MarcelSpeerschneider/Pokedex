@@ -1,4 +1,11 @@
-let pokemonNames = ['bulbasaur', 'ivysaur', 'charizard', 'caterpie', 'charmander', 'charmeleon', 'wartortle', 'pikachu', 'charizard', 'blastoise', 'squirtle', 'metapod', 'butterfree', 'weedle', 'absol', 'beedrill', 'pidgey', 'pidgeot', 'pidgeotto', 'rattata', 'raticate'];
+let pokemonNames = [
+    'bulbasaur', 'ivysaur', 'caterpie', 'charmander', 'charmeleon',
+    'wartortle', 'pikachu', 'charizard', 'blastoise', 'squirtle',
+    'metapod', 'butterfree', 'weedle', 'absol', 'beedrill',
+    'pidgey', 'pidgeot', 'pidgeotto', 'rattata', 'raticate',
+    'eevee', 'jolteon', 'vaporeon', 'flareon', 'espeon',
+    'umbreon', 'leafeon', 'glaceon', 'sylveon', 'eelektrik'
+];
 
 let baseStats = [];
 let narrowBars = [];
@@ -25,7 +32,7 @@ function renderSearchBar() {
     let searchBar = document.querySelector('.searchBarContainer');
     searchBar.innerHTML = /*html*/ `
     <form onsubmit="addPokemon(); return false;">
-    <input id="input" required><button>Add</button>
+    <input id="input" placeholder="Add more Pokémon"><button>Add</button>
     </form>`;
 
 }
@@ -68,27 +75,7 @@ async function renderPokedex() {
 async function renderPokedexInfo(name) {
     document.querySelector('.searchBarContainer').classList.add('hide');
     currentPokemon = await loadPokemon(name);
-    let pokedex = document.querySelector('.pokedex-container');
-    pokedex.innerHTML = '';
-    pokedex.innerHTML = /*html*/`
-    <div class="pokedex" id="pokedex">
-        <div class="x-container">
-        <img src="./img/x.svg" class="x" onclick="renderPokedex()">
-        </div>
-        <h1 id="pokemonName" class="pokemon-name"></h1>
-        <div class="abilities"></div>
-
-        <div class="info-container">
-            <div class="img-container"><img id="pokemon-img" class="pokemon-img"></div>
-            <nav>
-                <div class="links"><a class="link" onclick="renderAboutHTML()">About</a><a class="link" onclick="renderBaseStats()">Base Stats</a>
-                <a class="link" onclick="setupMovesTable()">Moves</a></div>
-            </nav>
-        <div class="content" id="content">
-            
-        </div>
-    </div>
-    `;
+    renderPokedexInfoHtml();
     renderPokemonInfo();
     renderPokemonImg();
     renderAbilities();
@@ -131,6 +118,7 @@ function renderBaseStats() {
 }
 
 function renderStatNumbers() {
+    baseStats = [];
     let statNumbers = document.querySelectorAll(['.stat-number']);
     for (let index in statNumbers) {
         if (currentPokemon.stats[index]) {
@@ -142,11 +130,10 @@ function renderStatNumbers() {
 }
 
 function renderTotal() {
-    let statsTotal = 0;
+    totalStat = 0;
     for (let i = 0; i < 5; i++) {
-        statsTotal += baseStats[i];
+        totalStat += baseStats[i];
     }
-    totalStat = statsTotal;
     document.getElementById('total').innerHTML = totalStat;
 }
 
@@ -204,6 +191,31 @@ function filledBarBackgroundColor() {
     }
 }
 
+function renderPokedexInfoHtml() {
+    let pokedex = document.querySelector('.pokedex-container');
+    let types = currentPokemon.types[0]['type']['name'];
+    pokedex.innerHTML += /*html*/`
+    <div class="pokedex-container-overlay">
+        <div class="pokedex ${types}-info" id="pokedex">
+            <div class="x-container">
+            <img src="./img/x.svg" class="x" onclick="renderPokedex()">
+            </div>
+            <h1 id="pokemonName" class="pokemon-name"></h1>
+            <div class="abilities"></div>
+
+            <div class="info-container">
+                <div class="img-container"><img id="pokemon-img" class="pokemon-img"></div>
+                <nav>
+                    <div class="links"><a class="link" onclick="renderAboutHTML()">About</a><a class="link" onclick="renderBaseStats()">Base Stats</a>
+                    <a class="link" onclick="setupMovesTable()">Moves</a></div>
+                </nav>
+            <div class="content" id="content">
+            
+            </div>
+    </div>
+    </div>
+    `;
+}
 
 function renderAboutHTML() {
     let container = document.getElementById('content');
@@ -306,23 +318,28 @@ function renderMovesRows() {
 
 async function addPokemon() {
     let inputValue = document.getElementById('input').value;
-    inputValue = lowerFirstLetter(inputValue);
-    let apiResponse = await loadPokemon(inputValue);
-    if (apiResponse && !pokemonNames.includes(inputValue)) {
-        pokemonNames.push(inputValue);
-        inputValue = 'Success';
-    }
-    else if (pokemonNames.includes(inputValue)) {
-        alert('Pokemon bereits vorhanden.');
+    if (inputValue) {
+        inputValue = lowerFirstLetter(inputValue);
+        let apiResponse = await loadPokemon(inputValue);
+        if (apiResponse && !pokemonNames.includes(inputValue)) {
+            pokemonNames.push(inputValue);
+            inputValue = 'Success';
+        }
+        else if (pokemonNames.includes(inputValue)) {
+            alert('Pokemon bereits vorhanden.');
+        }
+        else {
+            alert('Bitte gib ein gültiges Pokemon ein.');
+        }
+        savePokemonNames();
+        init();
     }
     else {
-        alert('Bitte gib ein gültiges Pokemon ein.');
+        alert('Bitte Pokemon eingeben');
     }
-    savePokemonNames();
-    init();
 }
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     let pokedex = document.getElementById('pokedex');
     if (!pokedex) return;
     if (pokedex.contains(event.target)) return;
